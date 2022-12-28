@@ -18,6 +18,14 @@ class POI {
     }
     return data;
   }
+
+  List<Poi> get pois {
+    try {
+      return searchPoiInfo!.pois!.poi!;
+    } catch (e) {
+      return <Poi>[];
+    }
+  }
 }
 
 class SearchPoiInfo {
@@ -71,33 +79,86 @@ class Pois {
 }
 
 class Poi {
+  /// POI ID
   String? id;
+
+  /// POI 식별자
   String? pkey;
+
+  /// 입구점 일련번호
   String? navSeq;
+
   String? collectionType;
   String? name;
   String? telNo;
   String? frontLat;
   String? frontLon;
+
+  /// 중심점 위도 좌표입니다.
   String? noorLat;
+
+  /// 중심점 경도 좌표입니다.
   String? noorLon;
+
+  /// 표출 주소 대분류명입니다.
+  ///
+  /// 예) 서울특별시
   String? upperAddrName;
+
+  /// 표출 주소 중분류명입니다.
+  ///
+  /// 예) 강남구
   String? middleAddrName;
+
+  /// 표출 주소 소분류명입니다.
+  ///
+  /// 예) 역삼동
   String? lowerAddrName;
+
+  /// 표출 주소 상세분류명입니다.
+  ///
+  /// 예) 미주아파트 101동 101호
   String? detailAddrName;
   String? mlClass;
   String? firstNo;
   String? secondNo;
+
+  /// 도로명입니다.
   String? roadName;
   String? firstBuildNo;
   String? secondBuildNo;
+
+  /// 거리 (unit: km)
   String? radius;
+
+  /// 업종 대표명
+  ///
+  /// 예) 의료편의
   String? bizName;
+
+  /// 업종 대분류명입니다.
+  ///
+  /// 예) 의료편의
   String? upperBizName;
+
+  /// 업종 중분류명입니다.
+  ///
+  /// 예) 의료시설
   String? middleBizName;
+
+  /// 업종 소분류명입니다.
+  ///
+  /// 예) 종합병원
   String? lowerBizName;
+
+  /// 업종 상세분류명입니다.
+  ///
+  /// 예) 기타
   String? detailBizName;
+
   String? rpFlag;
+
+  /// 주차시설 여부입니다.
   String? parkFlag;
   String? detailInfoFlag;
   String? desc;
