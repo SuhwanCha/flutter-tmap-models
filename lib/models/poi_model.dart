@@ -164,6 +164,9 @@ class Poi {
   String? desc;
   String? dataKind;
   String? zipCode;
+  String? adminDongCode;
+  String? legalDongCode;
+
   NewAddressList? newAddressList;
 
   Poi({
@@ -199,6 +202,8 @@ class Poi {
     this.desc,
     this.dataKind,
     this.zipCode,
+    this.adminDongCode,
+    this.legalDongCode,
     this.newAddressList,
   });
 
@@ -235,6 +240,8 @@ class Poi {
     desc = json['desc'];
     dataKind = json['dataKind'];
     zipCode = json['zipCode'];
+    adminDongCode = json['adminDongCode'];
+    legalDongCode = json['legalDongCode'];
     newAddressList = json['newAddressList'] != null
         ? NewAddressList.fromJson(json['newAddressList'])
         : null;
@@ -274,6 +281,8 @@ class Poi {
     data['desc'] = desc;
     data['dataKind'] = dataKind;
     data['zipCode'] = zipCode;
+    data['adminDongCode'] = adminDongCode;
+    data['legalDongCode'] = legalDongCode;
     if (newAddressList != null) {
       data['newAddressList'] = newAddressList!.toJson();
     }
