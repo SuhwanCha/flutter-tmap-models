@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_tmap_models/flutter_tmap_models.dart';
 
 void main() {
-  POI req = POI();
+  POI req = const POI();
 
   setUp(() async {
     req = await PoiRequest.send(

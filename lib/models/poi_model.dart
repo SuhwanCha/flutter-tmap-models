@@ -1,15 +1,16 @@
 part of flutter_tmap_models;
 
-class POI {
-  SearchPoiInfo? searchPoiInfo;
+class POI extends Equatable {
+  const POI({this.searchPoiInfo});
 
-  POI({this.searchPoiInfo});
-
-  POI.fromJson(Map<String, dynamic> json) {
-    searchPoiInfo = json['searchPoiInfo'] != null
-        ? SearchPoiInfo.fromJson(json['searchPoiInfo'])
-        : null;
+  // fromJson
+  factory POI.fromJson(Map<String, dynamic> json) {
+    return POI(
+      searchPoiInfo: SearchPoiInfo.fromJson(json['searchPoiInfo']),
+    );
   }
+
+  final SearchPoiInfo? searchPoiInfo;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -26,22 +27,28 @@ class POI {
       return <Poi>[];
     }
   }
+
+  @override
+  List<Object?> get props => [searchPoiInfo];
 }
 
-class SearchPoiInfo {
-  String? totalCount;
-  String? count;
-  String? page;
-  Pois? pois;
+class SearchPoiInfo extends Equatable {
+  const SearchPoiInfo({this.totalCount, this.count, this.page, this.pois});
 
-  SearchPoiInfo({this.totalCount, this.count, this.page, this.pois});
-
-  SearchPoiInfo.fromJson(Map<String, dynamic> json) {
-    totalCount = json['totalCount'];
-    count = json['count'];
-    page = json['page'];
-    pois = json['pois'] != null ? Pois.fromJson(json['pois']) : null;
+  // fromJson
+  factory SearchPoiInfo.fromJson(Map<String, dynamic> json) {
+    return SearchPoiInfo(
+      totalCount: json['totalCount'],
+      count: json['count'],
+      page: json['page'],
+      pois: Pois.fromJson(json['pois']),
+    );
   }
+
+  final String? totalCount;
+  final String? count;
+  final String? page;
+  final Pois? pois;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -53,21 +60,24 @@ class SearchPoiInfo {
     }
     return data;
   }
+
+  @override
+  List<Object?> get props => [totalCount, count, page, pois];
 }
 
-class Pois {
-  List<Poi>? poi;
+class Pois extends Equatable {
+  const Pois({this.poi});
 
-  Pois({this.poi});
-
-  Pois.fromJson(Map<String, dynamic> json) {
-    if (json['poi'] != null) {
-      poi = <Poi>[];
-      json['poi'].forEach((v) {
-        poi!.add(Poi.fromJson(v));
-      });
-    }
+  // fromJson
+  factory Pois.fromJson(Map<String, dynamic> json) {
+    return Pois(
+      poi: (json['poi'] as List<dynamic>?)
+          ?.map((dynamic e) => Poi.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
   }
+
+  final List<Poi>? poi;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -76,100 +86,103 @@ class Pois {
     }
     return data;
   }
+
+  @override
+  List<Object?> get props => [poi];
 }
 
-class Poi {
+class Poi extends Equatable {
   /// POI ID
-  String? id;
+  final String? id;
 
   /// POI 식별자
-  String? pkey;
+  final String? pkey;
 
   /// 입구점 일련번호
-  String? navSeq;
+  final String? navSeq;
 
-  String? collectionType;
-  String? name;
-  String? telNo;
-  String? frontLat;
-  String? frontLon;
+  final String? collectionType;
+  final String? name;
+  final String? telNo;
+  final String? frontLat;
+  final String? frontLon;
 
   /// 중심점 위도 좌표입니다.
-  String? noorLat;
+  final String? noorLat;
 
   /// 중심점 경도 좌표입니다.
-  String? noorLon;
+  final String? noorLon;
 
   /// 표출 주소 대분류명입니다.
   ///
   /// 예) 서울특별시
-  String? upperAddrName;
+  final String? upperAddrName;
 
   /// 표출 주소 중분류명입니다.
   ///
   /// 예) 강남구
-  String? middleAddrName;
+  final String? middleAddrName;
 
   /// 표출 주소 소분류명입니다.
   ///
   /// 예) 역삼동
-  String? lowerAddrName;
+  final String? lowerAddrName;
 
   /// 표출 주소 상세분류명입니다.
   ///
   /// 예) 미주아파트 101동 101호
-  String? detailAddrName;
-  String? mlClass;
-  String? firstNo;
-  String? secondNo;
+  final String? detailAddrName;
+  final String? mlClass;
+  final String? firstNo;
+  final String? secondNo;
 
   /// 도로명입니다.
-  String? roadName;
-  String? firstBuildNo;
-  String? secondBuildNo;
+  final String? roadName;
+  final String? firstBuildNo;
+  final String? secondBuildNo;
 
   /// 거리 (unit: km)
-  String? radius;
+  final String? radius;
 
   /// 업종 대표명
   ///
   /// 예) 의료편의
-  String? bizName;
+  final String? bizName;
 
   /// 업종 대분류명입니다.
   ///
   /// 예) 의료편의
-  String? upperBizName;
+  final String? upperBizName;
 
   /// 업종 중분류명입니다.
   ///
   /// 예) 의료시설
-  String? middleBizName;
+  final String? middleBizName;
 
   /// 업종 소분류명입니다.
   ///
   /// 예) 종합병원
-  String? lowerBizName;
+  final String? lowerBizName;
 
   /// 업종 상세분류명입니다.
   ///
   /// 예) 기타
-  String? detailBizName;
+  final String? detailBizName;
 
-  String? rpFlag;
+  final String? rpFlag;
 
   /// 주차시설 여부입니다.
-  String? parkFlag;
-  String? detailInfoFlag;
-  String? desc;
-  String? dataKind;
-  String? zipCode;
-  String? adminDongCode;
-  String? legalDongCode;
+  final String? parkFlag;
+  final String? detailInfoFlag;
+  final String? desc;
+  final String? dataKind;
+  final String? zipCode;
+  final String? adminDongCode;
+  final String? legalDongCode;
 
-  NewAddressList? newAddressList;
+  final NewAddressList? newAddressList;
 
-  Poi({
+  const Poi({
     this.id,
     this.pkey,
     this.navSeq,
@@ -207,44 +220,44 @@ class Poi {
     this.newAddressList,
   });
 
-  Poi.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    pkey = json['pkey'];
-    navSeq = json['navSeq'];
-    collectionType = json['collectionType'];
-    name = json['name'];
-    telNo = json['telNo'];
-    frontLat = json['frontLat'];
-    frontLon = json['frontLon'];
-    noorLat = json['noorLat'];
-    noorLon = json['noorLon'];
-    upperAddrName = json['upperAddrName'];
-    middleAddrName = json['middleAddrName'];
-    lowerAddrName = json['lowerAddrName'];
-    detailAddrName = json['detailAddrName'];
-    mlClass = json['mlClass'];
-    firstNo = json['firstNo'];
-    secondNo = json['secondNo'];
-    roadName = json['roadName'];
-    firstBuildNo = json['firstBuildNo'];
-    secondBuildNo = json['secondBuildNo'];
-    radius = json['radius'];
-    bizName = json['bizName'];
-    upperBizName = json['upperBizName'];
-    middleBizName = json['middleBizName'];
-    lowerBizName = json['lowerBizName'];
-    detailBizName = json['detailBizName'];
-    rpFlag = json['rpFlag'];
-    parkFlag = json['parkFlag'];
-    detailInfoFlag = json['detailInfoFlag'];
-    desc = json['desc'];
-    dataKind = json['dataKind'];
-    zipCode = json['zipCode'];
-    adminDongCode = json['adminDongCode'];
-    legalDongCode = json['legalDongCode'];
-    newAddressList = json['newAddressList'] != null
-        ? NewAddressList.fromJson(json['newAddressList'])
-        : null;
+  factory Poi.fromJson(Map<String, dynamic> json) {
+    return Poi(
+      id: json['id'],
+      pkey: json['pkey'],
+      navSeq: json['navSeq'],
+      collectionType: json['collectionType'],
+      name: json['name'],
+      telNo: json['telNo'],
+      frontLat: json['frontLat'],
+      frontLon: json['frontLon'],
+      noorLat: json['noorLat'],
+      noorLon: json['noorLon'],
+      upperAddrName: json['upperAddrName'],
+      middleAddrName: json['middleAddrName'],
+      lowerAddrName: json['lowerAddrName'],
+      detailAddrName: json['detailAddrName'],
+      mlClass: json['mlClass'],
+      firstNo: json['firstNo'],
+      secondNo: json['secondNo'],
+      roadName: json['roadName'],
+      firstBuildNo: json['firstBuildNo'],
+      secondBuildNo: json['secondBuildNo'],
+      radius: json['radius'],
+      bizName: json['bizName'],
+      upperBizName: json['upperBizName'],
+      middleBizName: json['middleBizName'],
+      lowerBizName: json['lowerBizName'],
+      detailBizName: json['detailBizName'],
+      rpFlag: json['rpFlag'],
+      parkFlag: json['parkFlag'],
+      detailInfoFlag: json['detailInfoFlag'],
+      desc: json['desc'],
+      dataKind: json['dataKind'],
+      zipCode: json['zipCode'],
+      adminDongCode: json['adminDongCode'],
+      legalDongCode: json['legalDongCode'],
+      newAddressList: NewAddressList.fromJson(json['newAddressList']),
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -288,20 +301,60 @@ class Poi {
     }
     return data;
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        pkey,
+        navSeq,
+        collectionType,
+        name,
+        telNo,
+        frontLat,
+        frontLon,
+        noorLat,
+        noorLon,
+        upperAddrName,
+        middleAddrName,
+        lowerAddrName,
+        detailAddrName,
+        mlClass,
+        firstNo,
+        secondNo,
+        roadName,
+        firstBuildNo,
+        secondBuildNo,
+        radius,
+        bizName,
+        upperBizName,
+        middleBizName,
+        lowerBizName,
+        detailBizName,
+        rpFlag,
+        parkFlag,
+        detailInfoFlag,
+        desc,
+        dataKind,
+        zipCode,
+        adminDongCode,
+        legalDongCode,
+        newAddressList,
+      ];
 }
 
-class NewAddressList {
-  List<NewAddress>? newAddress;
+class NewAddressList extends Equatable {
+  final List<NewAddress>? newAddress;
 
-  NewAddressList({this.newAddress});
+  const NewAddressList({this.newAddress});
 
-  NewAddressList.fromJson(Map<String, dynamic> json) {
-    if (json['newAddress'] != null) {
-      newAddress = <NewAddress>[];
-      json['newAddress'].forEach((v) {
-        newAddress!.add(NewAddress.fromJson(v));
-      });
-    }
+  factory NewAddressList.fromJson(Map<String, dynamic> json) {
+    return NewAddressList(
+      newAddress: json['newAddress'] != null
+          ? (json['newAddress'] as List)
+              .map((i) => NewAddress.fromJson(i))
+              .toList()
+          : null,
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -311,20 +364,23 @@ class NewAddressList {
     }
     return data;
   }
+
+  @override
+  List<Object?> get props => [newAddress];
 }
 
-class NewAddress {
-  String? centerLat;
-  String? centerLon;
-  String? frontLat;
-  String? frontLon;
-  String? roadName;
-  String? bldNo1;
-  String? bldNo2;
-  String? roadId;
-  String? fullAddressRoad;
+class NewAddress extends Equatable {
+  final String? centerLat;
+  final String? centerLon;
+  final String? frontLat;
+  final String? frontLon;
+  final String? roadName;
+  final String? bldNo1;
+  final String? bldNo2;
+  final String? roadId;
+  final String? fullAddressRoad;
 
-  NewAddress(
+  const NewAddress(
       {this.centerLat,
       this.centerLon,
       this.frontLat,
@@ -335,16 +391,19 @@ class NewAddress {
       this.roadId,
       this.fullAddressRoad});
 
-  NewAddress.fromJson(Map<String, dynamic> json) {
-    centerLat = json['centerLat'];
-    centerLon = json['centerLon'];
-    frontLat = json['frontLat'];
-    frontLon = json['frontLon'];
-    roadName = json['roadName'];
-    bldNo1 = json['bldNo1'];
-    bldNo2 = json['bldNo2'];
-    roadId = json['roadId'];
-    fullAddressRoad = json['fullAddressRoad'];
+  // fromJson
+  factory NewAddress.fromJson(Map<String, dynamic> json) {
+    return NewAddress(
+      centerLat: json['centerLat'],
+      centerLon: json['centerLon'],
+      frontLat: json['frontLat'],
+      frontLon: json['frontLon'],
+      roadName: json['roadName'],
+      bldNo1: json['bldNo1'],
+      bldNo2: json['bldNo2'],
+      roadId: json['roadId'],
+      fullAddressRoad: json['fullAddressRoad'],
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -360,4 +419,17 @@ class NewAddress {
     data['fullAddressRoad'] = fullAddressRoad;
     return data;
   }
+
+  @override
+  List<Object?> get props => [
+        centerLat,
+        centerLon,
+        frontLat,
+        frontLon,
+        roadName,
+        bldNo1,
+        bldNo2,
+        roadId,
+        fullAddressRoad,
+      ];
 }

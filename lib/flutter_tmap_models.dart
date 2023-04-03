@@ -1,6 +1,7 @@
 library flutter_tmap_models;
 
 import 'package:dio/dio.dart';
+import 'package:equatable/equatable.dart';
 
 part 'models/poi_model.dart';
 
